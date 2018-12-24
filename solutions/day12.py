@@ -83,7 +83,6 @@ def getSumAfter(garden,generation):
 
 if __name__ == '__main__':
 	pots = open(file,'r').read().splitlines();
-	# pots = open(sample,'r').read().splitlines();
 	state = toInitialState(pots[0])
 	spread = list(map(lambda x: toPlant(x),pots[2:]))
 	spread = list(filter(lambda x: x is not None,spread))
