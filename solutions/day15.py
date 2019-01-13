@@ -47,7 +47,7 @@ class Field:
 		return elves - len(list(filter(lambda x: x.species == 'E',self.pieces)))
 
 	def fight(self):
-		turns = 0		
+		turns = 0
 		while True:
 			self.pieces.sort(key=lambda x:x.pos,reverse=False) #put pieces in reading order
 			end = self.round()
@@ -143,7 +143,7 @@ class Field:
 	#calcalute shortest distance between two points
 	def distance(self,posA,posB):
 		square = self.board[posA[0]][posA[1]]
-		if square.type is '#': 
+		if square.type is '#':
 			return -1
 		queue = [(posA,0)]
 		visited = []
@@ -208,13 +208,7 @@ def printGrid(grid):
 		strGrid += reduce(lambda x,y: x + (y.occupied.species if y.occupied is not None else y.type),row,'') + '\n'
 	print(strGrid)
 
-if __name__ == "__main__":
-	lines = open(file,'r').readlines()
-	field = buildField(lines,3,3)
-	#get the outcome with default numbers
-	printGrid(field.board)
-	print(field.getOutcome())
-	printGrid(field.board)
+def minElfPower():
 	PE = 3
 	E = 6
 	#find bounds
@@ -226,7 +220,6 @@ if __name__ == "__main__":
 				mid = PE+(E-PE)//2
 				field = buildField(lines,3,mid)
 				lost = field.elvesLost()
-				print(PE,E,mid,lost)
 				if lost > 0:
 					PE = mid
 				else:
@@ -234,6 +227,35 @@ if __name__ == "__main__":
 			break
 		PE = E
 		E *= 2
+	return E
+
+if __name__ == "__main__":
+	lines = open(file,'r').readlines()
+	field = buildField(lines,3,3)
+	#get the outcome with default numbers
+	# printGrid(field.board)
+	print(field.getOutcome())
+	# printGrid(field.board)
+	# PE = 3
+	# E = 6
+	# #find bounds
+	# while True:
+	# 	field = buildField(lines,3,E)
+	# 	if field.elvesLost() == 0:
+	# 		#binary search
+	# 		while E-PE > 1:
+	# 			mid = PE+(E-PE)//2
+	# 			field = buildField(lines,3,mid)
+	# 			lost = field.elvesLost()
+	# 			print(PE,E,mid,lost)
+	# 			if lost > 0:
+	# 				PE = mid
+	# 			else:
+	# 				E = mid
+	# 		break
+	# 	PE = E
+	# 	E *= 2
+	E = minElfPower()
 	#find oucome with new elves p ower
 	field = buildField(lines,3,E)
 	print(field.getOutcome())

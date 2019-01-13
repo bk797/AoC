@@ -20,7 +20,7 @@ def getLargest():
 	return largest
 
 '''
-	The idea is that I store every position that the path goes through in a Dict, and 
+	The idea is that I store every position that the path goes through in a Dict, and
 	the Dict (plotMap) will store the shortest path to any give position on the map
 '''
 def explore(line,pos,index=1,pathLen=0):
@@ -44,7 +44,7 @@ def explore(line,pos,index=1,pathLen=0):
 		index += 1
 	if line[index] == '|':
 			index,otherLen = explore(line,pos,index+1,pathLen)
-			curLen = otherLen if otherLen < curLen else curLen 
+			curLen = otherLen if otherLen < curLen else curLen
 	return (index,curLen)
 
 def countPathsWithDistance(dis):
