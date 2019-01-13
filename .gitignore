@@ -1,4 +1,3 @@
-inputs/*
 modified/*
 day10.py
-*.txt
+solutions/*.txt
